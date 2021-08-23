@@ -1,4 +1,13 @@
 <?php
+function redirect($url)
+// https://stackoverflow.com/a/7066882
+{
+    $string = '<script type="text/javascript">';
+    $string .= 'window.location = "' . $url . '"';
+    $string .= '</script>';
+
+    echo $string;
+}
 session_start();						
 ?>
 <!DOCTYPE html>
@@ -46,8 +55,17 @@ function showValue(newValue,elemId)
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 	//@ echo "Beginning of file...<br>";
 	
-	$scadfile = $_SERVER['DOCUMENT_ROOT'].'/most-3d-customizer/start/'.$_GET['scadfile'];
-	
+	$workdir = $_SERVER['DOCUMENT_ROOT'].'/most-3d-customizer/files/';
+
+	if (file_exists($workdir.$_GET['scadfile'])){
+		// File has already been copied / edited in working directory
+		$scadfile = $workdir.$_GET['scadfile'];
+	}
+	else {
+		// First time edit, use file from originals folder
+		$scadfile = $_SERVER['DOCUMENT_ROOT'].'/most-3d-customizer/start/'.$_GET['scadfile'];
+	}
+
 	//@ echo "Got $scadfile ...<br>";
 	
 	$render3d = new \Libre3d\Render3d\Customizer();
@@ -58,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 	// this is the working directory, where it will put any files used during the render process, as well as the final
 	// rendered image.
 	//@ workingDir need to have 777 permission.
-	$render3d->workingDir($_SERVER['DOCUMENT_ROOT'].'/most-3d-customizer/files/'); 
+	$render3d->workingDir($workdir); 
 	//@ $render3d->workingDir(dirname(__FILE__).'/files/');
 	
 	//@ echo "Successful assigned working directory...<br>";
@@ -163,7 +181,8 @@ else {
 	$newscadname = $render3d->writeSCAD($scadfile, $result);
 	//@ echo "Successfully created new SCAD file ".$newscadname." !<br>";
 	//@ reload itself with new scasd filename
-	header('Location:'.$_SERVER['PHP_SELF'].'?scadfile='.$newscadname);
+	redirect($_SERVER['PHP_SELF'].'?scadfile='.$newscadname);
+	//header('Location:'.$_SERVER['PHP_SELF'].'?scadfile='.$newscadname);
 	exit;
 }
 ?>

@@ -167,9 +167,13 @@ class Render3d {
 				//@ echo 'working directory: '.$this->workingDir.'<br>';
 				//@echo 'basename: '.$pathInfo['basename'].'<br>';
 				// Copy it into the working folder
-				$copyResult = copy($filename, $this->workingDir . $pathInfo['basename']);
-				if (!$copyResult) {
-					throw new \Exception('Copying file to working directory failed.');
+				if (!file_exists($this->workingDir.$pathInfo['basename'])){
+					// Copy file only if it does not exist yet in working folder. Filename always changes on edits, so not an issue.
+					// If starting from scratch no file will be present (cf. check in index.php)
+					$copyResult = copy($filename, $this->workingDir . $pathInfo['basename']);
+					if (!$copyResult) {
+						throw new \Exception('Copying file to working directory failed.');
+					}
 				}
 			}
 			// NOTE: Filename will be minus the extension

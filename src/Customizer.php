@@ -111,7 +111,7 @@ class Customizer extends Render3d {
 		 	//@ create new scad filename
 		 	$filename = (strlen($pathInfo['filename']) > 50) ? substr($pathInfo['filename'],0,50) : $pathInfo['filename'];
 		 	$newscadname = $filename."_".date('Y_m_d_H-i-s').".scad";
-		 	$newfilename = $pathInfo['dirname']."/".$newscadname;
+		 	$newfilename = $this->workingDir."/".$newscadname;
 		 	//@ open new scad file to write
 			$newscad = fopen($newfilename,"w") or die("Unable to create new scad file!");
 			//@ write the updated parameters to a new scad file

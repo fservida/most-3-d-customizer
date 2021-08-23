@@ -1,4 +1,4 @@
- <?php
+<?php
 session_start();						
 ?>
 <!DOCTYPE html>
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 	
 	//@ echo "Successful executable openscad...<br>";
 	
-	$render3d->executable('povray', '/usr/local/bin/povray');
+	$render3d->executable('povray', '/usr/bin/povray');
 	
 	//@ echo "Successful executable povray...<br>";
 	
@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 		// This will also set the fileType for you.
 		$render3d->filename($scadfile);
 		//@ $render3d->filename(dirname(__FILE__).'/start/example.stl');
-	
+		
 		// Render!  This will do all the necessary conversions as long as the render engine (in this
 		// case, the default engine, PovRAY) "knows" how to convert the file into a file it can use for rendering.
 		// Note that this is a multi-step process that can be further broken down if you need it to.

@@ -1,6 +1,6 @@
 3D SCAD Customizer
 ==================
-v2.0.0alpha by Francesco SERVIDA, University of Lausanne.
+v1.0.0alpha by Francesco SERVIDA, University of Lausanne.
 - Fixes rendering issues and implements an improved interface to browse available files and download STL files ready to print.
 
 Based on work by Michigan Tech's Open Sustainability Technology Lab (https://github.com/mtu-most/most-3-d-customizer) and [libre3d/render-3d](https://github.com/libre3d/render-3d) by [Jonathan Foote](https://github.com/jonyo) to help interpret SCAD file, gnerate adjustable parameter inputs, and save to a new SCAD and STL file.

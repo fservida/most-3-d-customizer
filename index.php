@@ -138,10 +138,14 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 		
 			//@ echo "Render successful!  Rendered image will be at $renderedImagePath <br>";
 		?>
-		<table cellpadding="10"><tr><td valign="top">
-		<p>
-		<div style="text-align: center"><img src="<?= str_replace($_SERVER['DOCUMENT_ROOT'],'',$renderedImagePath) ?>" width="500" height="375"></div>
-		</p></td>
+		<table cellpadding="10">
+		<tr>
+			<td valign="top">
+				<p>
+					<div style="text-align: center"><img src="<?= str_replace($_SERVER['DOCUMENT_ROOT'],'',$renderedImagePath) ?>" width="500" height="375"></div>
+				</p>
+				<a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'],'',$workdir.''.pathinfo($scadfile,PATHINFO_FILENAME).'.stl') ?>">Download STL</a>
+			</td>
 		<?php
 		} catch (\Exception $e) {
 			echo "Render failed :( Exception: ".$e->getMessage()."<br>";

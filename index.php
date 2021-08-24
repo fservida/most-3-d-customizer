@@ -226,6 +226,8 @@ else {
 	exit;
 }
 ?>
-
+<p>
+	v1.0.0alpha by Francesco SERVIDA, University of Lausanne <br/>
+	Based on work by Michigan Tech's Open Sustainability Technology Lab (https://github.com/mtu-most/most-3-d-customizer) and Jonathan Foote (https://github.com/libre3d/render-3d)</p>
 </body>
 </html>

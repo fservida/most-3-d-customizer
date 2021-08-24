@@ -22,8 +22,8 @@ class Povray extends Render {
 		}
 
 		$defaults = [
-			'width' => 1600,
-			'height' => 1200,
+			'width' => 800,
+			'height' => 600,
 		];
 		$defaults['povray'] = $this->Render3d->executable('povray');
 
@@ -46,6 +46,7 @@ class Povray extends Render {
 		//+AMn	- use non-adaptive (n=1) or adaptive (n=2) supersampling
 		//+A0.n	- perform antialiasing (if color change is above n percent)
 		//+L	- Library include directory
+		//-D	- Disable  terminal preview (crashes when run from PHP)
 		$cmd = "{$opts['povray']} -D +I\"{$pov}\" +FN +W{$opts['width']} +H{$opts['height']} +O\"{$opts['PovOutFile']}\" +Q9 +AM2 +A0.5";
 		if (!empty($opts['PovLibraryIncDir'])) {
 			$cmd .= " +L{$opts['PovLibraryIncDir']}";

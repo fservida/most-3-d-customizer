@@ -62,6 +62,30 @@ function showValue(newValue,elemId)
 </table>
 <?php
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+	if ($_GET['clear_temp'] == "true"){
+		if (is_dir($workdir)) {
+			$temp_files = scandir($workdir);
+			$size = 0;
+			$count = 0;
+			foreach ($temp_files as $temp_file){
+				
+				if ($temp_file != '.' && $temp_file != '..' && $temp_file != '.gitkeep') {
+					$count += 1;
+					$size += stat($workdir.'/'.$temp_file)['size'];
+					unlink($workdir.'/'.$temp_file);
+				}
+			}
+
+			?>
+				<hr>
+				<h3>⚠️ Cleared <?php echo $count ?> Temporary Files - <?php echo "Total: ".$size." Bytes" ?> ⚠️</h3>
+				<hr>
+			<?php
+		}
+		else {
+			echo "<h1>Configuration Error, Provided Path is not a Valid Directory!</h1>";
+		}
+	}
 	if (!$_GET['scadfile']){
 		if (is_dir($originals_dir)) {
 			?>
@@ -226,6 +250,10 @@ else {
 	exit;
 }
 ?>
+<br/>
+<a href="<?php echo $_SERVER['PHP_SELF'].'?clear_temp=true' ?>">Clear Temporary Files</a>
+<br/>
+<br/>
 <p>
 	v1.0.0alpha by Francesco SERVIDA, University of Lausanne <br/>
 	Based on work by Michigan Tech's Open Sustainability Technology Lab (https://github.com/mtu-most/most-3-d-customizer) and Jonathan Foote (https://github.com/libre3d/render-3d)</p>
